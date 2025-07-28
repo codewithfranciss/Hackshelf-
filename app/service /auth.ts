@@ -10,7 +10,6 @@ export function Auth(onLogin: () => void) {
   };
 
   const handleRequestAccess = () => {
-    alert("Access request submitted. You'll hear back soon.");
     setEmail('');
     setShowRequestAccess(false);
   };
