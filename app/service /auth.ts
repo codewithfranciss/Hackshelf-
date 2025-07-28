@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-export function Auth(onLogin: () => void) {
+export function Auth() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [showRequestAccess, setShowRequestAccess] = useState(false);
 
   const handleLogin = () => {
-    if (password.trim()) onLogin();
+  
   };
 
   const handleRequestAccess = () => {
