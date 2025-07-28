@@ -7,11 +7,9 @@ import RequestAccessForm from '../RequestAccess';
 import PasswordForm from '../PasswordForm';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-interface LoginPageProps {
-  onLogin: () => void;
-}
 
-export default function LoginPage({ onLogin }: LoginPageProps) {
+
+export default function LoginPage() {
   const {
     password,
     email,
