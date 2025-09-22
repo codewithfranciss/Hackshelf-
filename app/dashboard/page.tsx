@@ -8,7 +8,7 @@ import BookList from "@/components/dashboard/BookList";
 import NoResults from "@/components/dashboard/NoResult";
 import { Button } from "@/components/ui/button";
 import { books } from "@/constants/dummy";
-import { getShelfIcon } from "@/utils/icons"; // optional helper
+// optional helper
 
 interface Book {
   id: string;
@@ -53,7 +53,7 @@ export default function DashboardPage() {
                 ← BACK_TO_SHELVES
               </Button>
               <div className="flex items-center gap-3">
-                {getShelfIcon(selectedShelf)}
+                
                 <h2 className="text-xl font-bold matrix-text font-mono tracking-wider">
                   {selectedShelf.toUpperCase().replace(/\s+/g, "_")}
                 </h2>
