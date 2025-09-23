@@ -8,7 +8,7 @@ import BookList from "@/components/dashboard/BookList";
 import NoResults from "@/components/dashboard/NoResult";
 import { Button } from "@/components/ui/button";
 import { books } from "@/constants/dummy";
-// optional helper
+
 
 interface Book {
   id: string;
