@@ -7,6 +7,7 @@ export class UserController {
     @Post('signup')
     async signUp(@Body() userDto: UserDto) {
         return this.userService.createUser(userDto);
+        
     }
     @Post('signin')
     async signIn(@Body() userDto: UserDto) {
