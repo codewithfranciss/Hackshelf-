@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Plus, BookOpen, FolderPlus, Upload } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+
 
 interface Category {
   id: string;
@@ -29,7 +29,7 @@ interface AdminPageProps {
   onBack: () => void;
 }
 export default function AdminPage({ onBack }: AdminPageProps) {
-  const { toast } = useToast();
+
   const [categories, setCategories] = useState<Category[]>([
     { id: '1', name: 'DSA', description: 'Data Structures and Algorithms', bookCount: 2 },
     { id: '2', name: 'Machine Learning', description: 'ML and AI resources', bookCount: 1 },
@@ -58,11 +58,7 @@ export default function AdminPage({ onBack }: AdminPageProps) {
 
   const handleCreateCategory = () => {
     if (!categoryForm.name) {
-      toast({
-        title: "Error",
-        description: "Category name is required",
-        variant: "destructive"
-      });
+
       return;
     }
 
@@ -76,19 +72,11 @@ export default function AdminPage({ onBack }: AdminPageProps) {
     setCategories([...categories, newCategory]);
     setCategoryForm({ name: '', description: '' });
     
-    toast({
-      title: "Success",
-      description: "Category created successfully"
-    });
   };
 
   const handleAddBook = () => {
     if (!bookForm.title || !bookForm.author || !bookForm.categoryId || !bookForm.totalPages) {
-      toast({
-        title: "Error",
-        description: "Please fill in all required fields",
-        variant: "destructive"
-      });
+   
       return;
     }
 
@@ -121,10 +109,6 @@ export default function AdminPage({ onBack }: AdminPageProps) {
       pdfFile: null
     });
 
-    toast({
-      title: "Success",
-      description: "Book added successfully"
-    });
   };
 
   return (
@@ -191,7 +175,7 @@ export default function AdminPage({ onBack }: AdminPageProps) {
                 <Textarea
                   id="category-description"
                   value={categoryForm.description}
-                  onChange={(e) => setCategoryForm({...categoryForm, description: e.target.value})}
+                  onChange={(e:any) => setCategoryForm({...categoryForm, description: e.target.value})}
                   placeholder="Brief description of the category"
                   className="bg-input border-border"
                   rows={3}
@@ -272,7 +256,7 @@ export default function AdminPage({ onBack }: AdminPageProps) {
                 <Label htmlFor="book-category">Category *</Label>
                 <Select
                   value={bookForm.categoryId}
-                  onValueChange={(value) => setBookForm({...bookForm, categoryId: value})}
+                  onValueChange={(value:any) => setBookForm({...bookForm, categoryId: value})}
                 >
                   <SelectTrigger className="bg-input border-border">
                     <SelectValue placeholder="Select category" />
@@ -312,7 +296,7 @@ export default function AdminPage({ onBack }: AdminPageProps) {
                 <Textarea
                   id="book-description"
                   value={bookForm.description}
-                  onChange={(e) => setBookForm({...bookForm, description: e.target.value})}
+                  onChange={(e:any) => setBookForm({...bookForm, description: e.target.value})}
                   placeholder="Book description"
                   className="bg-input border-border"
                   rows={3}
