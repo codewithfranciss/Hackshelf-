@@ -1,3 +1,5 @@
+"use client";
+
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { Button } from "@/components/ui/button";
@@ -31,6 +33,7 @@ const RichTextEditor = ({ content, onChange, placeholder }: RichTextEditorProps)
       }),
     ],
     content,
+    immediatelyRender: false,
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
     },
