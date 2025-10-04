@@ -27,35 +27,48 @@ export default function AdminPage({ onBack }: { onBack: () => void }) {
   });
 
   // Add category
-  const handleCreateCategory = async () => {
-      if (!categoryForm.name.trim()) {
-      setError("Category name is required");
-      return;
-    }
-try{
+// Add category
+const handleCreateCategory = async () => {
+  setError(null); // reset any previous error
+
+  if (!categoryForm.name.trim()) {
+    setError("Category name is required");
+    return;
+  }
+
+  try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/category`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(categoryForm),
     });
 
-    if (!res.ok) {
-      setError("Failed to create category");
-      return;
-    } else {
-          setCategories([
-      ...categories,
-      { id: Date.now().toString(), ...categoryForm, bookCount: 0 },
-    ]);
-    setCategoryForm({ name: "", description: "" });
-    }
-  }catch(err){
-    setError("Failed to create category");
-    return;
-  }
-    // On success, update local state
+    const data = await res.json();
 
-  };
+    if (!res.ok) {
+      // Handle server-side errors
+      setError(data.message || "Failed to create category");
+      return;
+    }
+      // Update local state with new category
+    setCategories((prev) => [
+      ...prev,
+      {
+        id: data.id, // real DB ID from NestJS/Prisma
+        name: data.name,
+        description: data.description || "",
+        bookCount: 0,
+      },
+    ]);
+
+    // Reset form after success
+    setCategoryForm({ name: "", description: "" });
+  } catch (err) {
+    console.error(err);
+    setError("Network error. Please try again.");
+  }
+};
+
 
   // Add book
   const handleAddBook = () => {
