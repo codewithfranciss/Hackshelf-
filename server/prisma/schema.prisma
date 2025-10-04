@@ -24,5 +24,17 @@ model Category {
   id        Int      @id @default(autoincrement())
   name      String   @unique
   description String?
+  books     Book[]
   createdAt DateTime @default(now())
+}
+
+model Book {
+  id          Int      @id @default(autoincrement())
+  title       String
+  thumbnailUrl      String
+  description String?
+  fileUrl    String
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime @default(now())
 }
