@@ -6,7 +6,7 @@ import CategoryForm from "@/components/admin/category/CategoryForm";
 import CategoryList from "@/components/admin/category/CategoryList";
 import BookForm from "@/components/admin/create-books/BookForm";
 import BookList from "@/components/dashboard/BookList";
-import { Upload } from 'lucide-react';
+import { createCategory } from "../service /category";
 
 export default function AdminPage({ onBack }: { onBack: () => void }) {
   const [categories, setCategories] = useState<any[]>([]);
@@ -27,45 +27,27 @@ export default function AdminPage({ onBack }: { onBack: () => void }) {
   });
 
   // Add category
-// Add category
 const handleCreateCategory = async () => {
-  setError(null); // reset any previous error
-
+  setError(null);
   if (!categoryForm.name.trim()) {
     setError("Category name is required");
     return;
   }
-
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/category`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(categoryForm),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      // Handle server-side errors
-      setError(data.message || "Failed to create category");
-      return;
-    }
-      // Update local state with new category
+    const newCategory = await createCategory(categoryForm);
+    // Update frontend state
     setCategories((prev) => [
       ...prev,
       {
-        id: data.id, // real DB ID from NestJS/Prisma
-        name: data.name,
-        description: data.description || "",
+        id: newCategory.id,
+        name: newCategory.name,
+        description: newCategory.description || "",
         bookCount: 0,
       },
     ]);
-
-    // Reset form after success
     setCategoryForm({ name: "", description: "" });
-  } catch (err) {
-    console.error(err);
-    setError("Network error. Please try again.");
+  } catch (error: any) {
+    setError(error.message);
   }
 };
 
