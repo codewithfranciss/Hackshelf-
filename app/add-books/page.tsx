@@ -6,11 +6,13 @@ import CategoryForm from "@/components/admin/category/CategoryForm";
 import CategoryList from "@/components/admin/category/CategoryList";
 import BookForm from "@/components/admin/create-books/BookForm";
 import BookList from "@/components/dashboard/BookList";
+import { Upload } from 'lucide-react';
 
 export default function AdminPage({ onBack }: { onBack: () => void }) {
   const [categories, setCategories] = useState<any[]>([]);
   const [books, setBooks] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState<"categories" | "books">("categories");
+  const [error, setError] = useState<string | null>(null);
 
   // Forms
   const [categoryForm, setCategoryForm] = useState({ name: "", description: "" });
@@ -25,13 +27,34 @@ export default function AdminPage({ onBack }: { onBack: () => void }) {
   });
 
   // Add category
-  const handleCreateCategory = () => {
-    if (!categoryForm.name) return;
-    setCategories([
+  const handleCreateCategory = async () => {
+      if (!categoryForm.name.trim()) {
+      setError("Category name is required");
+      return;
+    }
+try{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/category`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(categoryForm),
+    });
+
+    if (!res.ok) {
+      setError("Failed to create category");
+      return;
+    } else {
+          setCategories([
       ...categories,
       { id: Date.now().toString(), ...categoryForm, bookCount: 0 },
     ]);
     setCategoryForm({ name: "", description: "" });
+    }
+  }catch(err){
+    setError("Failed to create category");
+    return;
+  }
+    // On success, update local state
+
   };
 
   // Add book
