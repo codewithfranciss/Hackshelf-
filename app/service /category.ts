@@ -6,3 +6,9 @@ export const createCategory = (categoryForm: { name: string; description?: strin
     method: "POST",
     body: JSON.stringify(categoryForm),
   });
+
+export async function getAllCategories() {
+  return apiFetch("/category", {
+    method: "GET",
+  });
+}
