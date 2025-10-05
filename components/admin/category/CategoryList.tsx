@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { getAllCategories } from "@/app/service /category";
+import { getAllCategories } from "@/app/service/category";
 import { Edit, Trash2 } from "lucide-react";
 
 export default function CategoryList() {

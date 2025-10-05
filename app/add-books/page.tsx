@@ -6,7 +6,7 @@ import CategoryForm from "@/components/admin/category/CategoryForm";
 import CategoryList from "@/components/admin/category/CategoryList";
 import BookForm from "@/components/admin/create-books/BookForm";
 import BookList from "@/components/dashboard/BookList";
-import { createCategory } from "../service /category";
+import { createCategory } from "../service/category";
 
 export default function AdminPage({ onBack }: { onBack: () => void }) {
   const [categories, setCategories] = useState<any[]>([]);

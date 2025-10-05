@@ -1,6 +1,23 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+interface Category {
+  id: string | number;
+  name: string;
+  description?: string;
+  bookCount?: number;
+}
+
+interface Book {
+  id: string | number;
+  title: string;
+  author: string;
+  categoryId: string | number;
+  totalPages: number;
+  thumbnail: string;
+  description?: string;
+  pdfFile?: File | null;
+}
 interface BookListProps {
   books: any[];
   categories: any[];

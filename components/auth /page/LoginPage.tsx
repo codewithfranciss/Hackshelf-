@@ -1,6 +1,6 @@
 'use client';
 
-import { Auth } from '@/app/service /auth';
+import { Auth } from '@/app/service/auth';
 import Header from '@/components/shared /Header';
 import Footer from '@/components/shared /Footer';
 import RequestAccessForm from '../RequestAccess';
