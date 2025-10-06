@@ -29,5 +29,10 @@ export class CategoryService {
     });
   }
 
-
+  async updateCategory(id: number, data: Partial<CreateCategoryDto>) {
+    return this.prisma.category.update({
+      where: { id },
+      data,
+    });
+  }
 }
