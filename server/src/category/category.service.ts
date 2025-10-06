@@ -22,4 +22,12 @@ export class CategoryService {
       include: { books: true },
     });
   }
+
+  async deleteCategory(id: number) {
+    return this.prisma.category.delete({
+      where: { id },
+    });
+  }
+
+
 }
