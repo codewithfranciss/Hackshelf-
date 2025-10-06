@@ -16,23 +16,23 @@ export class CategoryService {
     async getCategories() {
         return this.prisma.category.findMany();
     }    
-  async getCategoryById(id: number) {
-    return this.prisma.category.findUnique({
-      where: { id },
-      include: { books: true },
+    async getCategoryById(id: number) {
+        return this.prisma.category.findUnique({
+            where: { id },
+            include: { books: true },
+        });
+  }
+
+    async deleteCategory(id: number) {
+        return this.prisma.category.delete({
+            where: { id },
     });
   }
 
-  async deleteCategory(id: number) {
-    return this.prisma.category.delete({
-      where: { id },
-    });
-  }
-
-  async updateCategory(id: number, data: Partial<CreateCategoryDto>) {
-    return this.prisma.category.update({
-      where: { id },
-      data,
-    });
+    async updateCategory(id: number, data: Partial<CreateCategoryDto>) {
+        return this.prisma.category.update({
+            where: { id },
+            data,
+        });
   }
 }
